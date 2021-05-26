@@ -1,0 +1,49 @@
+type Customer {
+    id: ID!
+    email: String!
+    password: String!
+    name: String!
+    cart: Cart!
+}
+
+type Cart {
+    products: [ProductInCart!]!
+}
+
+type Product {
+    id: ID!
+    name: String!
+    price: Int!
+}
+
+type ProductInCart {
+    product: Product!
+    quantity: Int!
+}
+
+type Query {
+    products(name: String): [Product!]!
+}
+
+input AddToCard {
+    product_id: ID!
+    quantity: Int!
+}
+
+input Login {
+    email: String!
+    password: String!
+}
+
+input Register {
+    email: String!
+    name: String!
+    password: String!
+}
+
+type Mutation {
+    login(input: Login!): String!
+    register(input: Register!): String!
+    addToCart(input: AddToCard!): Cart!
+    removeFromCart(product_id: String!): Cart!
+}
